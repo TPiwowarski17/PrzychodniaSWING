@@ -566,7 +566,6 @@ public class PanelWizyta extends JPanel
         gbc.gridx=1;
         gbc.gridy=2;
         btnDelete.addActionListener(e -> {
-            //JOptionPane.showMessageDialog(null, "DELETE PRESSED");
             database.deleteVisit(Integer.parseInt(tfid.getText()));
             listId = database.getIds("Visit");
             JOptionPane.showMessageDialog(null,"Usunieto wizyte nr " + tfid.getText());

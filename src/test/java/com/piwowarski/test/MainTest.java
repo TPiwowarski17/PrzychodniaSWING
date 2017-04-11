@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.regex.Matcher;
 
 /**
  * Created by Piwowarski Tomasz on 05.04.2017.
@@ -62,13 +61,25 @@ public class MainTest
         Doctor d = new Doctor(1,"Adam","Kowalski","Okulista",1,150);
         Patient p = new Patient(0,"Jan","Nowak",13,"Grypa");
 
-        Assert.assertThat("Powinien mieć wlasności id",d, Matchers.hasProperty("id"));
-        Assert.assertThat("Powinien mieć wlasności name",d, Matchers.hasProperty("name"));
-        Assert.assertThat("Powinien mieć wlasności surname",d, Matchers.hasProperty("surname"));
-        Assert.assertThat("Powinien mieć wlasności specialization",d, Matchers.hasProperty("specialization"));
-        Assert.assertThat("Powinien mieć wlasności experience",d, Matchers.hasProperty("experience"));
-        Assert.assertThat("Powinien mieć wlasności visitPrice",d, Matchers.hasProperty("visitPrice"));
+        Assert.assertThat("Doktor powinien mieć wlasności id",d, Matchers.hasProperty("id"));
+        Assert.assertThat("Doktor powinien mieć wlasności name",d, Matchers.hasProperty("name"));
+        Assert.assertThat("Doktor powinien mieć wlasności surname",d, Matchers.hasProperty("surname"));
+        Assert.assertThat("Doktor powinien mieć wlasności specialization",d, Matchers.hasProperty("specialization"));
+        Assert.assertThat("Doktor powinien mieć wlasności experience",d, Matchers.hasProperty("experience"));
+        Assert.assertThat("Doktor powinien mieć wlasności visitPrice",d, Matchers.hasProperty("visitPrice"));
 
-        Assert.assertThat("Powinien mieć wlasności id",d, Matchers.hasProperty("id"));
+        Assert.assertThat("Pacjent powinien mieć wlasności id",p, Matchers.hasProperty("id"));
+        Assert.assertThat("Pacjent powinien mieć wlasności name",p, Matchers.hasProperty("name"));
+        Assert.assertThat("Pacjent powinien mieć wlasności surname",p, Matchers.hasProperty("surname"));
+        Assert.assertThat("Pacjent powinien mieć wlasności age",p, Matchers.hasProperty("age"));
+        Assert.assertThat("Pacjent powinien mieć wlasności illness",p, Matchers.hasProperty("illness"));
+    }
+
+    @Test
+    public void test4()
+    {
+        Doctor d = new Doctor(1,"Adam","Kowalski","Okulista",10,150);
+        Assert.assertThat(d,DoctorMatcher.customDoctorMatcher("[A-Z][a-z]+","[A-Z][a-z]+","[A-Z]([a-z]| )+",
+                0,50,0,1000));
     }
 }

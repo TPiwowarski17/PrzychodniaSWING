@@ -88,7 +88,7 @@ public class PanelFilter extends JPanel
                 "patientName","patientSurname","age","illness","date","city");
         customTableModel = new CustomTableModel(database.selectInnerJoin(), headers);
         table = new JTable(customTableModel);
-        table.setFont(new Font("consolas",Font.PLAIN,10));
+        table.setFont(new Font("consolas",Font.PLAIN,14));
 
 
         JPanel panelCheckBox = new JPanel(new GridBagLayout());
