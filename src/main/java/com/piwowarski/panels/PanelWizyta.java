@@ -41,11 +41,11 @@ public class PanelWizyta extends JPanel
     private JLabel lExperience1 = new JLabel("Experience");
     private JLabel lVisitPrice1 = new JLabel("Visit price");
 
-    private JTextField tfNameDoctor1 = new JTextField(5);
-    private JTextField tfSurnameDoctor1 = new JTextField(5);
-    private JTextField tfSpecialization1 = new JTextField(5);
-    private JTextField tfExperience1 = new JTextField(5);
-    private JTextField tfVisitPrice1 = new JTextField(5);
+    private JTextField tfNameDoctor1 = new JTextField(15);
+    private JTextField tfSurnameDoctor1 = new JTextField(15);
+    private JTextField tfSpecialization1 = new JTextField(15);
+    private JTextField tfExperience1 = new JTextField(15);
+    private JTextField tfVisitPrice1 = new JTextField(15);
 
     //Panel Lekarz 2
     private JLabel lNameDoctor2 = new JLabel("Name");
@@ -54,21 +54,21 @@ public class PanelWizyta extends JPanel
     private JLabel lExperience2 = new JLabel("Experience");
     private JLabel lVisitPrice2 = new JLabel("Visit price");
 
-    private JTextField tfNameDoctor2 = new JTextField(5);
-    private JTextField tfSurnameDoctor2 = new JTextField(5);
-    private JTextField tfSpecialization2 = new JTextField(5);
-    private JTextField tfExperience2 = new JTextField(5);
-    private JTextField tfVisitPrice2 = new JTextField(5);
+    private JTextField tfNameDoctor2 = new JTextField(15);
+    private JTextField tfSurnameDoctor2 = new JTextField(15);
+    private JTextField tfSpecialization2 = new JTextField(15);
+    private JTextField tfExperience2 = new JTextField(15);
+    private JTextField tfVisitPrice2 = new JTextField(15);
     //Panel pacjent 1
     private JLabel lNamePatient1 = new JLabel("Name");
     private JLabel lSurnamePatient1 = new JLabel("Surname");
     private JLabel lAgePatient1 = new JLabel("Age");
     private JLabel lIllnessPatient1 = new JLabel("Illness");
 
-    private JTextField tfNamePatient1 = new JTextField(5);
-    private JTextField tfSurnamePatient1 = new JTextField(5);
-    private JTextField tfAgePatient1 = new JTextField(5);
-    private JTextField tfIllnessPatient1 = new JTextField(5);
+    private JTextField tfNamePatient1 = new JTextField(15);
+    private JTextField tfSurnamePatient1 = new JTextField(15);
+    private JTextField tfAgePatient1 = new JTextField(15);
+    private JTextField tfIllnessPatient1 = new JTextField(15);
 
     //Panel Pacjent 2
     private JLabel lNamePatient2 = new JLabel("Name");
@@ -76,10 +76,10 @@ public class PanelWizyta extends JPanel
     private JLabel lAgePatient2 = new JLabel("Age");
     private JLabel lIllnessPatient2 = new JLabel("Illness");
 
-    private JTextField tfNamePatient2 = new JTextField(5);
-    private JTextField tfSurnamePatient2 = new JTextField(5);
-    private JTextField tfAgePatient2 = new JTextField(5);
-    private JTextField tfIllnessPatient2 = new JTextField(5);
+    private JTextField tfNamePatient2 = new JTextField(15);
+    private JTextField tfSurnamePatient2 = new JTextField(15);
+    private JTextField tfAgePatient2 = new JTextField(15);
+    private JTextField tfIllnessPatient2 = new JTextField(15);
     //Panel Date
     private JLabel lDate = new JLabel("Date");
     private JLabel lCity = new JLabel("City");

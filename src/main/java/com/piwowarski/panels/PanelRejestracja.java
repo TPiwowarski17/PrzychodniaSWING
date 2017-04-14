@@ -55,7 +55,7 @@ public class PanelRejestracja extends JPanel
             throw new BadAttributeValueExpException("Złe nazwisko");
         }
         String email = tfUserEmail.getText();
-        if(!name.matches("([a-z]|[0-9]|.)+@(gmail|onet|interia).(pl|com)"))
+        if(!email.matches("([a-z]|[0-9]|.)+@(gmail|onet|interia).(pl|com)"))
         {
             throw new BadAttributeValueExpException("Zły email");
         }
@@ -205,16 +205,7 @@ public class PanelRejestracja extends JPanel
         addToPanel(this,tfUserSurname,gbc,1,1,20);
 
         tfUserEmail.setToolTipText("małe znaki + @ + domena");
-        /*tfUserEmail.addActionListener(e->{
-            if(!tfUserEmail.getText().matches("([a-z]|[0-9]|.)+@(gmail|onet|interia).(pl|com)"))
-            {
-                tfUserEmail.setBackground(Color.RED);
-            }
-            else
-            {
-                tfUserEmail.setBackground(Color.WHITE);
-            }
-        });*/
+
         tfUserEmail.setFont(font);
         lUserEmail.setFont(font);
         addToPanel(this,lUserEmail,gbc,0,2,20);

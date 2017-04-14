@@ -31,6 +31,7 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
             conf.enforceForeignKeys(true);
             conn = DriverManager.getConnection(DB, conf.toProperties());
             stat = conn.createStatement();
+            createTabel();
         } catch (ClassNotFoundException e)
         {
             e.printStackTrace();
@@ -47,6 +48,60 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
         }
         return przychodniaDao;
     }
+
+    @Override
+    public void createTabel()
+    {
+        String sqlDoctor = " CREATE TABLE IF NOT EXISTS Doctor " +
+        "(" +
+        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+         "name VARCHAR(30) NOT NULL," +
+         "surname VARCHAR(30) NOT NULL," +
+         "specialization VARCHAR(15) NOT NULL," +
+         "experience INTEGER NOT NULL," +
+         "visitPrice INTEGER NOT NULL" +
+         ");";
+        String sqlPatient = "CREATE TABLE IF NOT EXISTS Patient " + "(" +
+        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+        "name VARCHAR(30) NOT NULL," +
+        "surname VARCHAR(30) NOT NULL," +
+        "age INTEGER NOT NULL," +
+        "illness VARCHAR(20) NOT NULL" +
+        ");";
+        String sqlVisit = "CREATE TABLE IF NOT EXISTS Visit " +
+                "(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "idDoctor INTEGER NOT NULL," +
+                    "idPatient INTEGER NOT NULL," +
+                    "date TIMESTAMP NOT NULL," +
+                    "city VARCHAR(30) NOT NULL, " +
+                    "FOREIGN KEY (idDoctor) REFERENCES Doctor(id) ON DELETE CASCADE ON UPDATE CASCADE, " +
+                    "FOREIGN KEY (idPatient) REFERENCES Patient(id) ON DELETE CASCADE ON UPDATE CASCADE " +
+                    ");";
+            String sqlUser = "CREATE TABLE IF NOT EXISTS User" +
+                    "(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    "name VARCHAR(20) NOT NULL," +
+                    "surname VARCHAR(30) NOT NULL," +
+                    "email VARCHAR(40) NOT NULL," +
+                    "city VARCHAR(30) NOT NULL," +
+                    "age INTEGER NOT NULL," +
+                    "userName VARCHAR(30) NOT NULL," +
+                    "userPassword VARCHAR(30) NOT NULL" +
+           ");";
+
+        try
+        {
+            stat.execute(sqlDoctor);
+            stat.execute(sqlPatient);
+            stat.execute(sqlVisit);
+            stat.execute(sqlUser);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void insertDoctor(Doctor d)
     {

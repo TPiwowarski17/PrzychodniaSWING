@@ -82,4 +82,10 @@ public class MainTest
         Assert.assertThat(d,DoctorMatcher.customDoctorMatcher("[A-Z][a-z]+","[A-Z][a-z]+","[A-Z]([a-z]| )+",
                 0,50,0,1000));
     }
+    @Test
+    public void test5()
+    {
+        Patient p = new Patient(0,"Jan","Nowak",13,"Grypa");
+        Assert.assertThat(p,PatientMatcher.customPatientMatcher("[A-Z][a-z]+","[A-Z][a-z]+","[A-Z]([a-z]| )+",0,99));
+    }
 }

@@ -10,6 +10,7 @@ import java.util.Optional;
  */
 public interface PrzychodniaDao
 {
+    void createTabel();
     void insertDoctor(Doctor d);
     void insertPatient(Patient p);
     void insertVisit(Visit v);
