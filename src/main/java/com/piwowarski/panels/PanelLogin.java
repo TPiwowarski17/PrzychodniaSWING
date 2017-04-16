@@ -120,12 +120,6 @@ public class PanelLogin extends JPanel
                 JFrame frame =(JFrame)getRootPane().getParent();
                 frame.setContentPane(mp);
                 frame.setJMenuBar(mp.createMenuBar());
-
-                Toolkit kit = Toolkit.getDefaultToolkit();
-                Dimension screenSize = kit.getScreenSize();
-                int screenWidth = screenSize.width;
-                int screenHeight = screenSize.height;
-
                 frame.setLocation(0,0);
                 frame.pack();
             }

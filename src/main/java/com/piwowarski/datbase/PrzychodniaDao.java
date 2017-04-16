@@ -15,6 +15,7 @@ public interface PrzychodniaDao
     void insertPatient(Patient p);
     void insertVisit(Visit v);
     void insertUser(User u);
+    void insertMedicalHistory(Patient p);
     Optional<User> isCorect(String userName, String userPassword);
     void deleteDoctor(int id);
     void deletePatient(int id);
@@ -30,6 +31,8 @@ public interface PrzychodniaDao
     List<DoctorPatient> selectInnerJoin();
     Optional<Patient> selectPatientById(int id);
     Optional<Visit> selectVisitById(int id);
+    Optional<Doctor> selectDoctorByName(String namesurname);
+    Optional<Patient> selectPatientByName(String namesurname);
     int countSpecialization(String tableName,String columnName,String name);
     int counDate(LocalDate ldate);
     List<LocalDate> selectDateInnerJoin();
@@ -52,5 +55,9 @@ public interface PrzychodniaDao
     List<Integer> getIds(String tableName);
     int countPatientInDoctor(Doctor d);
     int countPatientIllOn(String illness);
+    List<String> getNameSurname(String tabel);
+    int selectId(String tabel,String namesurname);
+    List<String> selectAllIllness();
+    List<String> selectMedicalHistory(String namesurname);
 
 }

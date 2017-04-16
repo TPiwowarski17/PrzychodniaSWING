@@ -1,17 +1,11 @@
 package com.piwowarski.main;
 
-import com.piwowarski.classes.Doctor;
-import com.piwowarski.classes.Patient;
-import com.piwowarski.classes.User;
-import com.piwowarski.classes.Visit;
+
 import com.piwowarski.datbase.PrzychodniaDao;
 import com.piwowarski.datbase.PrzychodniaDaoImpl;
-import com.piwowarski.encryption.Encryption;
 import com.piwowarski.panels.PanelLogin;
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-
 
 /**
  * Created by Piwowarski Tomasz on 02.02.2017.
@@ -53,6 +47,8 @@ public class Main
     }
     public static void main(String[] args)
     {
+        //PrzychodniaDao db = PrzychodniaDaoImpl.getInstance();
+
         javax.swing.SwingUtilities.invokeLater(
                 () -> createWindow()
         );

@@ -13,12 +13,14 @@ public class MainPanel extends JPanel
     private PanelPacjent panelPacjent = new PanelPacjent();
     private PanelLekarz panelLekarz = new PanelLekarz();
     private PanelFilter panelFilter = new PanelFilter();
+    private PanelHistoria panelHistoria = new PanelHistoria();
 
     private final String PANEL_WIZYTA = "PANEL_WIZYTA";
     private final String PANEL_STATYSTYK = "PANEL_STATYSTYK";
     private final String PANEL_LEKARZ = "PANEL_LEKARZ";
     private final String PANEL_PACJENT = "PANEL_PACJENT";
     private final String PANEL_FILTER = "PANEL_FILTER";
+    private final String PANEL_HISTORIA = "PANEL_HISTORIA";
 
     private void createWindow(JPanel panel)
     {
@@ -43,7 +45,6 @@ public class MainPanel extends JPanel
         {
             ex.printStackTrace();
         }
-
         frame.pack();
         frame.setVisible(true);
     }
@@ -53,6 +54,7 @@ public class MainPanel extends JPanel
         add(panelStatystyka,PANEL_STATYSTYK);
         add(panelLekarz,PANEL_LEKARZ);
         add(panelPacjent,PANEL_PACJENT);
+        add(panelHistoria,PANEL_HISTORIA);
     }
     public JMenuBar createMenuBar()
     {
@@ -85,11 +87,17 @@ public class MainPanel extends JPanel
         menuPanelWyswietlen.addActionListener(e->{
            createWindow(panelWizyta);
         });
+        JMenuItem menuPanelHistoria = new JMenuItem(PANEL_HISTORIA);
+        menuPanelHistoria.addActionListener(e->{
+            CardLayout cl = (CardLayout)getLayout();
+            cl.show(this,PANEL_HISTORIA);
+        });
         menu.add(menuPanelLekarz);
         menu.add(menuPanelPacjent);
         menu.add(menuPanelStatystyk);
         menu.add(menuPanelWyswietlen);
         menu.add(menuPanelFilter);
+        menu.add(menuPanelHistoria);
 
         menuBar.add(menu);
 

@@ -194,6 +194,7 @@ public class PanelPacjent extends JPanel
         gbcPanelOperationsButton.gridy = 0;
         btnInsert.addActionListener(e->{
             database.insertPatient(getDataPatient());
+            database.insertMedicalHistory(getDataPatient());
             listId = database.getIds("Patient");
             JOptionPane.showMessageDialog(null,"Dodano pacjenta");
         });
@@ -201,7 +202,11 @@ public class PanelPacjent extends JPanel
 
         gbcPanelOperationsButton.gridx = 1;
         gbcPanelOperationsButton.gridy = 0;
-        btnInsert.addActionListener(e->{
+        btnUpdate.addActionListener(e->{
+            if(/*!tfIllness.equals(database.selectPatientById(Integer.parseInt(tfId.getText())))*/true)
+            {
+                database.insertMedicalHistory(getDataPatient());
+            }
             database.updatePatient(getDataPatient());
             JOptionPane.showMessageDialog(null,"Zaktualizowano pacjenta");
         });

@@ -28,11 +28,11 @@ public class PanelWizyta extends JPanel
     private JButton btnInsert = new JButton("INSERT");
 
     private JLabel lDoctorID = new JLabel("ID Doctor");
-    private JComboBox<Integer> cbDoctor;
-    private CustomComboboxModel<Integer> cbDoctorModel;
+    private JComboBox<String> cbDoctor;
+    private CustomComboboxModel<String> cbDoctorModel;
     private JLabel lPatientID = new JLabel("ID Patient");
-    private JComboBox<Integer> cbPatient;
-    private CustomComboboxModel<Integer> cbPatientModel;
+    private JComboBox<String> cbPatient;
+    private CustomComboboxModel<String> cbPatientModel;
 
     //Panel Lekarz 1
     private JLabel lNameDoctor1 = new JLabel("Name");
@@ -172,8 +172,8 @@ public class PanelWizyta extends JPanel
     }
     private Visit getDataVisit()
     {
-        int idDoctor = (int)cbDoctor.getSelectedItem();
-        int idPatient = (int)cbPatient.getSelectedItem();
+        int idDoctor = database.selectId("Doctor",(String)cbDoctor.getSelectedItem());
+        int idPatient = database.selectId("Patient",(String)cbPatient.getSelectedItem());
         String city = tfCity.getText();
         LocalDate date = Instant.ofEpochMilli(this.dchDate.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
         return new Visit(1,idDoctor,idPatient,date,city);
@@ -436,7 +436,7 @@ public class PanelWizyta extends JPanel
         panelPatient1.add(tfIllnessPatient1,gbcPanelPacjent);
 
 
-        //Panel Patient 1
+        //Panel Patient 2
 
         JPanel panelPatient2 = new JPanel(new GridBagLayout());
         GridBagConstraints gbcPanelPacjent2 = new GridBagConstraints();
@@ -500,11 +500,11 @@ public class PanelWizyta extends JPanel
 
         gbcPanelID.gridx = 1;
         gbcPanelID.gridy = 0;
-        cbDoctorModel = new CustomComboboxModel<>(database.getIds("Doctor"));
+        cbDoctorModel = new CustomComboboxModel<>(database.getNameSurname("Doctor"));
         cbDoctor = new JComboBox<>(cbDoctorModel);
         cbDoctor.setFont(new Font("consolas",Font.PLAIN,20));
         cbDoctor.addActionListener(e->{
-            setDataDoctor(database.selectDoctorById((int)cbDoctor.getSelectedItem()));
+            setDataDoctor(database.selectDoctorByName((String)cbDoctor.getSelectedItem()));
         });
         panelID.add(cbDoctor,gbcPanelID);
 
@@ -514,11 +514,11 @@ public class PanelWizyta extends JPanel
 
         gbcPanelID.gridx = 3;
         gbcPanelID.gridy = 0;
-        cbPatientModel = new CustomComboboxModel<>(database.getIds("Patient"));
+        cbPatientModel = new CustomComboboxModel<>(database.getNameSurname("Patient"));
         cbPatient = new JComboBox<>(cbPatientModel);
         cbPatient.setFont(new Font("consolas",Font.PLAIN,20));
         cbPatient.addActionListener(e->{
-            setDataPatient(database.selectPatientById((int)cbPatient.getSelectedItem()));
+            setDataPatient(database.selectPatientByName((String)cbPatient.getSelectedItem()));
         });
         panelID.add(cbPatient,gbcPanelID);
 
@@ -596,8 +596,8 @@ public class PanelWizyta extends JPanel
             JOptionPane.showMessageDialog(null,"Dodano wizyte");
         });
         add(btnInsert,gbc);
-        setDataPatient(database.selectPatientById((int)cbPatient.getSelectedItem()));
-        setDataDoctor(database.selectDoctorById((int)cbDoctor.getSelectedItem()));
+        setDataPatient(database.selectPatientByName((String)cbPatient.getSelectedItem()));
+        setDataDoctor(database.selectDoctorByName((String)cbDoctor.getSelectedItem()));
         setDataVisit(database.selectVisitById(Integer.parseInt(tfid.getText())));
 
     }

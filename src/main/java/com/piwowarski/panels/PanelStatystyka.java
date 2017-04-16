@@ -76,20 +76,27 @@ public class PanelStatystyka extends JPanel
     }
     private void getMostCommonIllness()
     {
-        java.util.List<String> illnessList = database.selectNameInnerJoin("P.illness");
-        java.util.List<Integer> quantityList = new ArrayList<>();
-        illnessList.forEach(x->{
-            quantityList.add(database.countPatientIllOn(x));
-        });
-        int idx = 0;
-        for (int i = 1; i < quantityList.size(); i++)
+
+        java.util.List<String> illnessList = database.selectAllIllness();
+        if(illnessList.size()>0)
         {
-            if(quantityList.get(i) > quantityList.get(idx))
+            java.util.List<Integer> quantityList = new ArrayList<>();
+            illnessList.forEach(x ->
             {
-                idx = i;
+                quantityList.add(database.countPatientIllOn(x));
+            });
+            quantityList.forEach(x-> System.out.println(x));
+            int idx = 0;
+            for (int i = 1; i < quantityList.size(); i++)
+            {
+                if (quantityList.get(i) > quantityList.get(idx))
+                {
+                    idx = i;
+                }
             }
+            tfStat3.setText(illnessList.get(idx) + " liczba zachorowań " + quantityList.get(idx));
         }
-        tfStat3.setText( illnessList.get(idx) + " liczba zachorowań " + quantityList.get(idx));
+
     }
     public PanelStatystyka()
     {

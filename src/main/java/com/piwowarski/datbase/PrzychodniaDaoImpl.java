@@ -89,6 +89,13 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
                     "userName VARCHAR(30) NOT NULL," +
                     "userPassword VARCHAR(30) NOT NULL" +
            ");";
+            String sqlMediaclHistory = "CREATE TABLE IF NOT EXISTS MedicalHistory" +
+                    "(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    "name VARCHAR(20) NOT NULL," +
+                    "surname VARCHAR(20) NOT NULL," +
+                    "illness VARCHAR(20) NOT NULL" +
+                    ");";
 
         try
         {
@@ -96,6 +103,7 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
             stat.execute(sqlPatient);
             stat.execute(sqlVisit);
             stat.execute(sqlUser);
+            stat.execute(sqlMediaclHistory);
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -182,6 +190,24 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void insertMedicalHistory(Patient p)
+    {
+        String sql = "INSERT INTO MedicalHistory(name,surname,illness) VALUES (?,?,?)";
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,p.getName());
+            ps.setString(2,p.getSurname());
+            ps.setString(3,p.getIllness());
+            ps.execute();
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public Optional<User> isCorect(String userName, String userPassword)
     {
@@ -488,6 +514,60 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
         }
         return visitOptional;
     }
+
+    @Override
+    public Optional<Doctor> selectDoctorByName(String namesurname)
+    {
+        Optional<Doctor> doctorOptional = Optional.ofNullable(null);
+        String[] name = namesurname.split(" ");
+        String sql = "SELECT * FROM Doctor WHERE name = ? AND surname = ?";
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,name[0]);
+            ps.setString(2,name[1]);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+                int id = rs.getInt(1);
+                String specialzation = rs.getString(4);
+                int experience = rs.getInt(5);
+                int visitPrice = rs.getInt(6);
+                doctorOptional = Optional.of(new Doctor(id,name[0],name[1],specialzation,experience,visitPrice));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return doctorOptional;
+    }
+
+    @Override
+    public Optional<Patient> selectPatientByName(String namesurname)
+    {
+        Optional<Patient> patientOptional = Optional.ofNullable(null);
+        String[] name = namesurname.split(" ");
+        String sql = "SELECT * FROM Patient WHERE name = ? AND surname = ?";
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,name[0]);
+            ps.setString(2,name[1]);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+                int id = rs.getInt(1);
+                int age = rs.getInt(4);
+                String illness = rs.getString(5);
+                patientOptional = Optional.of(new Patient(id,name[0],name[1],age,illness));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return patientOptional;
+    }
+
     @Override
     public int countSpecialization(String tableName,String columnName,String name)
     {
@@ -695,7 +775,7 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
     @Override
     public int countPatientIllOn(String illness)
     {
-        String sql = "SELECT COUNT(id) FROM Patient WHERE illness = ?";
+        String sql = "SELECT COUNT(*) FROM Patient WHERE illness = ?";
         try
         {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -710,5 +790,89 @@ public class PrzychodniaDaoImpl implements PrzychodniaDao
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public List<String> getNameSurname(String tabel)
+    {
+        java.util.List<String> list = new ArrayList<>();
+        String sql = "SELECT NAME || ' ' || SURNAME FROM " + tabel;
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                list.add(rs.getString(1));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public int selectId(String tabel, String namesurname)
+    {
+        String[] name = namesurname.split(" ");
+        String sql = "SELECT id FROM "+ tabel + " WHERE name = ? AND surname = ?";
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,name[0]);
+            ps.setString(2,name[1]);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public List<String> selectAllIllness()
+    {
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT DISTINCT illness FROM Patient";
+        try
+        {
+            ResultSet rs = stat.executeQuery(sql);
+            while(rs.next())
+            {
+                list.add(rs.getString(1));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<String> selectMedicalHistory(String namesurname)
+    {
+        java.util.List<String> list = new ArrayList<>();
+        String[] name = namesurname.split(" ");
+        String sql = "SELECT illness FROM MedicalHistory WHERE name = ? AND surname = ?";
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,name[0]);
+            ps.setString(2,name[1]);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                list.add(rs.getString(1));
+            }
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
