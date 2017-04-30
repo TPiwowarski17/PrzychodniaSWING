@@ -85,7 +85,6 @@ public class PanelStatystyka extends JPanel
             {
                 quantityList.add(database.countPatientIllOn(x));
             });
-            quantityList.forEach(x-> System.out.println(x));
             int idx = 0;
             for (int i = 1; i < quantityList.size(); i++)
             {

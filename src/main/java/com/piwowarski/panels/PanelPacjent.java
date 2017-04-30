@@ -203,7 +203,7 @@ public class PanelPacjent extends JPanel
         gbcPanelOperationsButton.gridx = 1;
         gbcPanelOperationsButton.gridy = 0;
         btnUpdate.addActionListener(e->{
-            if(/*!tfIllness.equals(database.selectPatientById(Integer.parseInt(tfId.getText())))*/true)
+            if(!tfIllness.equals(database.selectPatientById(Integer.parseInt(tfId.getText()))))
             {
                 database.insertMedicalHistory(getDataPatient());
             }

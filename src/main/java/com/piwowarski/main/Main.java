@@ -1,8 +1,5 @@
 package com.piwowarski.main;
 
-
-import com.piwowarski.datbase.PrzychodniaDao;
-import com.piwowarski.datbase.PrzychodniaDaoImpl;
 import com.piwowarski.panels.PanelLogin;
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +9,8 @@ import java.awt.*;
  */
 public class Main
 {
+    //szyfrowanie sh512
+
     public static void createWindow()
     {
         JFrame frame = new JFrame("Przychodnia Ostatni Dech :D");
@@ -47,8 +46,6 @@ public class Main
     }
     public static void main(String[] args)
     {
-        //PrzychodniaDao db = PrzychodniaDaoImpl.getInstance();
-
         javax.swing.SwingUtilities.invokeLater(
                 () -> createWindow()
         );

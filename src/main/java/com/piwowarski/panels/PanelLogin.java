@@ -4,6 +4,7 @@ import com.piwowarski.classes.User;
 import com.piwowarski.datbase.PrzychodniaDao;
 import com.piwowarski.datbase.PrzychodniaDaoImpl;
 import com.piwowarski.encryption.Encryption;
+import com.piwowarski.encryption.EncryptionSHA512;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,10 +88,10 @@ public class PanelLogin extends JPanel
     {
         String userName = tfID.getText();
         String password = String.valueOf(tfPassword.getPassword());
-        Encryption enc = new Encryption(password);
-        enc.encrypt();
-        password = enc.getWordEncrypt();
-       return database.isCorect(userName,password);
+
+        password = EncryptionSHA512.encryptSHA512(password);
+
+        return database.isCorect(userName,password);
     }
     public PanelLogin()
     {

@@ -58,8 +58,8 @@ public class PanelHistoria extends JPanel
         gbc.gridy = 0;
         panelName.add(cbMedicalHistory,gbc);
 
-        DefaultListCellRenderer renderer =  (DefaultListCellRenderer)listIllness.getCellRenderer();
-        renderer.setHorizontalAlignment(JLabel.CENTER);
+        /*DefaultListCellRenderer renderer =  (DefaultListCellRenderer)listIllness.getCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);*/
 
         add(panelName,BorderLayout.NORTH);
         add(new JScrollPane(listIllness),BorderLayout.CENTER);

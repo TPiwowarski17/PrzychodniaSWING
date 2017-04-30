@@ -4,6 +4,7 @@ import com.piwowarski.classes.User;
 import com.piwowarski.datbase.PrzychodniaDao;
 import com.piwowarski.datbase.PrzychodniaDaoImpl;
 import com.piwowarski.encryption.Encryption;
+import com.piwowarski.encryption.EncryptionSHA512;
 
 import javax.management.BadAttributeValueExpException;
 import javax.swing.*;
@@ -67,9 +68,7 @@ public class PanelRejestracja extends JPanel
         }
         String userName = tfAccountName.getText();
         String password = String.valueOf(tfPassword.getPassword());
-        Encryption e = new Encryption(password);
-        e.encrypt();
-        password = e.getWordEncrypt();
+        password = EncryptionSHA512.encryptSHA512(password);
         return new User(0,name,surname,email,city,age,userName,password);
     }
     private boolean isPasswordCorect(String password)

@@ -83,7 +83,7 @@ public class PanelWizyta extends JPanel
     //Panel Date
     private JLabel lDate = new JLabel("Date");
     private JLabel lCity = new JLabel("City");
-    private JTextField tfCity = new JTextField(10);
+    private JTextField tfCity = new JTextField(15);
     private JDateChooser dchDate = new JDateChooser(new Date());
 
     private PrzychodniaDao database = PrzychodniaDaoImpl.getInstance();
